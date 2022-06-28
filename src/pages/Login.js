@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
+// import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+// import fetchToken from '../redux/actions';
+import { initGame } from '../service/localStoragePlayer';
 
-export default class Login extends Component {
+class Login extends Component {
   state = {
     nome: '',
     email: '',
@@ -20,6 +24,19 @@ export default class Login extends Component {
     const { target: { value, name } } = event;
     this.setState({ [name]: value }, this.verifyInputs);
   };
+
+  fetchToken = async () => {
+    const response = await fetch('https://opentdb.com/api_token.php?command=request');
+    const data = await response.json();
+    return data.token;
+  }
+
+  handleClick = async () => {
+    const { history } = this.props;
+    const token = await this.fetchToken();
+    initGame(token);
+    history.push('/game');
+  }
 
   render() {
     const {
@@ -66,3 +83,16 @@ export default class Login extends Component {
       </form>);
   }
 }
+
+Login.propTypes = {
+  // fetch: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
+
+// const mapDispatchToProps = (dispatch) => ({
+//   fetch: () => dispatch(fetchToken()),
+// });
+
+export default Login;
