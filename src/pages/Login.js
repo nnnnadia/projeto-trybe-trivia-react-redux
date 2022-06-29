@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-// import fetchToken from '../redux/actions';
+import actGetPlayer from '../redux/actions';
 import { initGame } from '../service/localStoragePlayer';
 
 class Login extends Component {
@@ -33,9 +33,13 @@ class Login extends Component {
   }
 
   handleClick = async () => {
-    const { history } = this.props;
+    const { history, getPlayer } = this.props;
+    const { nome, email } = this.state;
     const token = await this.fetchToken();
     initGame(token);
+    getPlayer(nome, email);
+    console.log(nome);
+    console.log(email);
     history.push('/game');
   }
 
@@ -91,14 +95,14 @@ class Login extends Component {
 }
 
 Login.propTypes = {
-  // fetch: PropTypes.func.isRequired,
+  getPlayer: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
 };
 
-// const mapDispatchToProps = (dispatch) => ({
-//   fetch: () => dispatch(fetchToken()),
-// });
+const mapDispatchToProps = (dispatch) => ({
+  getPlayer: (nome, email) => dispatch(actGetPlayer(nome, email)),
+});
 
-export default Login;
+export default connect(null, mapDispatchToProps)(Login);
