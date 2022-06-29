@@ -58,6 +58,6 @@ Questions.propTypes = {
     difficulty: PropTypes.string.isRequired,
     question: PropTypes.string.isRequired,
     correct_answer: PropTypes.string.isRequired,
-    incorret_answer: PropTypes.arrayOf.isRequired,
+    incorret_answer: PropTypes.arrayOf(PropTypes.strings).isRequired,
   }).isRequired,
 };
