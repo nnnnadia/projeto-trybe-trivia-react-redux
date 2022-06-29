@@ -1,35 +1,53 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Header from '../Components/Header';
 import fetchTriviaQuestions from '../service/fetchTriviaQuestions';
 import Questions from '../Components/Questions';
-'
-class Game extends Component {
+
+export default class Game extends Component {
   state = {
-    questions:[],
+    questions: [],
     index: 0,
     answered: false,
   }
 
-  componentDidMount = async () => {
+  async componentDidMount() {
     const { history } = this.props;
     const { results } = await fetchTriviaQuestions();
-
-    if(results.length === 0) {
+    console.log(results);
+    if (!results.length) {
       localStorage.removeItem('token');
+      history.push('/');
     }
-  };
+
+    this.setState((prevState) => ({
+      ...prevState,
+      questions: [...results],
+    }));
+  }
 
   render() {
+    const { questions, answered, index } = this.state;
     return (
       <section>
         <Header />
         <h1>Game page</h1>
-        <Questions />
+        { !questions.length && (
+          <Questions
+            questions={ questions[index] }
+            answered={ answered }
+            handleClick={ this.handleClick }
+          />)}
       </section>
     );
   }
 }
 
+Game.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
 // Game.propTypes = {
 //   fetch: PropTypes.func.isRequired,
 // };
@@ -37,5 +55,3 @@ class Game extends Component {
 // const mapDispatchToProps = (dispatch) => ({
 //   fetch: () => dispatch(fetchToken()),
 // });
-
-export default Game;
