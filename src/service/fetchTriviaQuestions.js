@@ -1,11 +1,10 @@
-const fetchTriviaQuestions = () => {
+async function fetchTriviaQuestions() {
   const getTriviaQuestions = 'https://opentdb.com/api.php?amount=5&token=';
   const userToken = localStorage.getItem('token');
 
-  return fetch(`${getTriviaQuestions}${userToken}`)
-    .then((response) => response.json())
-    .then((results) => results)
-    .catch((err) => console.log(err));
-};
+  const fetchQuestions = await fetch(`${getTriviaQuestions}${userToken}`);
+  const data = await fetchQuestions.json();
+  return data;
+}
 
 export default fetchTriviaQuestions;

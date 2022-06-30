@@ -38,8 +38,6 @@ class Login extends Component {
     const token = await this.fetchToken();
     initGame(token);
     getPlayer(nome, email);
-    console.log(nome);
-    console.log(email);
     history.push('/game');
   }
 
