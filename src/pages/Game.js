@@ -32,8 +32,8 @@ class Game extends Component {
     const {
       props: { history },
       state: { renderIndex },
-     } = this;
-     const LAST_INDEX = 4;
+    } = this;
+    const LAST_INDEX = 4;
     this.setState((prevState) => ({
       renderIndex: prevState.renderIndex + 1,
       isAnswered: false,
