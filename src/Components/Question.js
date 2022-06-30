@@ -15,10 +15,10 @@ class Question extends React.Component {
         incorrect_answers: incorrectAnswers,
       },
     } = this.props;
-    const VARIAVEL_RANDOMICA = 0.5;
+    const shuffle = 0.5;
 
     const answersList = [...incorrectAnswers]
-      .sort(() => VARIAVEL_RANDOMICA - Math.random());
+      .sort(() => shuffle - Math.random());
 
     const randomIndex = Math.round(Math.random() * incorrectAnswers.length);
     answersList.splice(randomIndex, 0, correctAnswer);
