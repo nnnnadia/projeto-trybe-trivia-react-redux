@@ -39,6 +39,7 @@ class Game extends Component {
   handleAnswer = (questionScore) => {
     const { updateScore } = this.props;
     this.setState({ isAnswered: true });
+
     updateScore(questionScore);
   }
 
