@@ -46,7 +46,11 @@ class Game extends Component {
     const { updateScore } = this.props;
     this.setState({ isAnswered: true });
 
-    updateScore(questionScore);
+    if (questionScore === 0) {
+      updateScore(questionScore, 0);
+    } else {
+      updateScore(questionScore, 1);
+    }
   }
 
   render() {
@@ -88,7 +92,7 @@ class Game extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  updateScore: (questionScore) => dispatch(actUpdateScore(questionScore)),
+  updateScore: (score, assertion) => dispatch(actUpdateScore(score, assertion)),
 });
 
 Game.propTypes = {
