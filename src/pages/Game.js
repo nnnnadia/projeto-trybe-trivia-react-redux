@@ -45,7 +45,13 @@ class Game extends Component {
             </section>
           ))
         }
-        <button type="button" onClick={ this.nextQuestion }>Próximo</button>
+        <button
+          data-testid="btn-next"
+          type="button"
+          onClick={ this.nextQuestion }
+        >
+          Próximo
+        </button>
       </main>
     );
   }
