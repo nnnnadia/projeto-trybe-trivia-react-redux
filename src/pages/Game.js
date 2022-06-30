@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import md5 from 'crypto-js/md5';
 import PropTypes from 'prop-types';
 import Header from '../Components/Header';
 import Question from '../Components/Question';
 import fetchTriviaQuestions from '../service/fetchTriviaQuestions';
 import { actUpdateScore } from '../redux/actions';
+import { saveScorePlayer } from '../service/localStorageRanking';
 
 class Game extends Component {
   state = {
@@ -31,14 +32,20 @@ class Game extends Component {
   nextQuestion = () => {
     const {
       props: { history },
-      state: { renderIndex },
     } = this;
     const LAST_INDEX = 4;
     this.setState((prevState) => ({
       renderIndex: prevState.renderIndex + 1,
       isAnswered: false,
-    }));
-    if (renderIndex === LAST_INDEX) history.push('/feedback');
+    }), () => {
+      const { renderIndex } = this.state;
+      if (renderIndex === LAST_INDEX) {
+        const { ranking } = this.props;
+        const storeRanking = { ...ranking, picture: `https://www.gravatar.com/avatar/${md5(ranking.picture).toString()}` };
+        saveScorePlayer(storeRanking);
+        history.push('/feedback');
+      }
+    });
   }
 
   // Evento de resposta do usuário
@@ -78,13 +85,18 @@ class Game extends Component {
             </section>
           ))
         }
-        <Link to="/ranking">
-          <button type="button" data-testid="btn-ranking">Ranking</button>
-        </Link>
       </main>
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  ranking: {
+    name: state.player.name,
+    score: state.player.score,
+    picture: state.player.gravatarEmail,
+  },
+});
 
 const mapDispatchToProps = (dispatch) => ({
   updateScore: (questionScore) => dispatch(actUpdateScore(questionScore)),
@@ -95,6 +107,9 @@ Game.propTypes = {
     push: PropTypes.func.isRequired,
   }).isRequired,
   updateScore: PropTypes.func.isRequired,
+  ranking: PropTypes.shape({
+    picture: PropTypes.string,
+  }).isRequired,
 };
 
-export default connect(null, mapDispatchToProps)(Game);
+export default connect(mapStateToProps, mapDispatchToProps)(Game);
