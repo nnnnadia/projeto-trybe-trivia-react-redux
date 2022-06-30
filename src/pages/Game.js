@@ -29,10 +29,16 @@ class Game extends Component {
 
   // Evento de próxima questão
   nextQuestion = () => {
+    const {
+      props: { history },
+      state: { renderIndex },
+    } = this;
+    const LAST_INDEX = 4;
     this.setState((prevState) => ({
       renderIndex: prevState.renderIndex + 1,
       isAnswered: false,
     }));
+    if (renderIndex === LAST_INDEX) history.push('/feedback');
   }
 
   // Evento de resposta do usuário
@@ -44,10 +50,14 @@ class Game extends Component {
 
   render() {
     const {
-      questions,
-      renderIndex,
-      isAnswered,
-    } = this.state;
+      state: {
+        questions,
+        renderIndex,
+        isAnswered,
+      },
+      handleAnswer,
+      nextQuestion,
+    } = this;
     return (
       <main>
         <Header />
@@ -58,10 +68,10 @@ class Game extends Component {
               {
                 renderIndex === index && (
                   <Question
-                    handleClick={ this.handleAnswer }
+                    handleClick={ handleAnswer }
                     question={ question }
                     isAnswered={ isAnswered }
-                    nextQuestion={ this.nextQuestion }
+                    nextQuestion={ nextQuestion }
                   />
                 )
               }
