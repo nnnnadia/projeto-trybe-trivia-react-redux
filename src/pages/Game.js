@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../Components/Header';
 import Question from '../Components/Question';
-// import Timer from '../Components/Timer';
 import fetchTriviaQuestions from '../service/fetchTriviaQuestions';
 
 class Game extends Component {
@@ -57,19 +56,13 @@ class Game extends Component {
                     handleClick={ this.handleAnswer }
                     question={ question }
                     isAnswered={ isAnswered }
+                    nextQuestion={ this.nextQuestion }
                   />
                 )
               }
             </section>
           ))
         }
-        <button
-          data-testid="btn-next"
-          type="button"
-          onClick={ this.nextQuestion }
-        >
-          Próximo
-        </button>
       </main>
     );
   }

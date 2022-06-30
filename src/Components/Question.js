@@ -55,6 +55,7 @@ class Question extends React.Component {
       },
       handleClick,
       isAnswered,
+      nextQuestion,
     } = this.props;
     const { answersList, correctAnswerIndex, time, intervalId, isTimeOut } = this.state;
     return (
@@ -100,6 +101,19 @@ class Question extends React.Component {
             })
           }
         </div>
+        <div>
+          {
+            (isAnswered || isTimeOut) && (
+              <button
+                data-testid="btn-next"
+                type="button"
+                onClick={ nextQuestion }
+              >
+                Próximo
+              </button>
+            )
+          }
+        </div>
       </div>
     );
   }
@@ -115,6 +129,7 @@ Question.propTypes = {
   }).isRequired,
   handleClick: PropTypes.func.isRequired,
   isAnswered: PropTypes.bool.isRequired,
+  nextQuestion: PropTypes.func.isRequired,
 };
 
 export default Question;
