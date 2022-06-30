@@ -1,4 +1,3 @@
-// import { SUCCESS, FAIL } from '../actions/actionTypes';
 import GET_PLAYER from '../actions/actionTypes';
 
 const INITIAL_STATE = {
