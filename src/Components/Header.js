@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 class Header extends React.Component {
   render() {
     const { name, gravatarEmail, score } = this.props;
-    // const userHash = md5(gravatarEmail).toString();
     return (
       <header>
         <img

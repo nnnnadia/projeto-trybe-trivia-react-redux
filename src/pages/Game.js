@@ -40,7 +40,7 @@ class Game extends Component {
           questions.map((question, index) => (
             <section key={ question.question }>
               {
-                renderIndex === index && (<Question question={ question } />)
+                renderIndex === index && <Question question={ question } />
               }
             </section>
           ))
