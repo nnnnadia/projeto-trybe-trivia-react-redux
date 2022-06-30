@@ -62,7 +62,7 @@ class Question extends React.Component {
       <div>
         <Timer
           time={ time }
-          intervaId={ intervalId }
+          intervalId={ intervalId }
           isAnswered={ isAnswered }
           updateTimer={ this.updateTimer }
         />
