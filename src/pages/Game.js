@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import PropTypes from 'prop-types';
 import Header from '../Components/Header';
 import Question from '../Components/Question';
@@ -63,6 +64,9 @@ class Game extends Component {
             </section>
           ))
         }
+        <Link to="/ranking">
+          <button type="button" data-testid="btn-ranking">Ranking</button>
+        </Link>
       </main>
     );
   }
