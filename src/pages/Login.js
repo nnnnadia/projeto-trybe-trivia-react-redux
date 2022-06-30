@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import actGetPlayer from '../redux/actions';
+import { actGetPlayer } from '../redux/actions';
 import { initGame } from '../service/localStoragePlayer';
 
 class Login extends Component {

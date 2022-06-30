@@ -1,10 +1,15 @@
-import GET_PLAYER from './actionTypes';
+import { GET_PLAYER, UPDATE_SCORE } from './actionTypes';
 
-const actGetPlayer = (name, gravatarEmail) => ({
+export const actGetPlayer = (name, gravatarEmail) => ({
   type: GET_PLAYER,
   payload: {
     name, gravatarEmail,
   },
 });
 
-export default actGetPlayer;
+export const actUpdateScore = (questionScore) => ({
+  type: UPDATE_SCORE,
+  payload: {
+    questionScore,
+  },
+});
