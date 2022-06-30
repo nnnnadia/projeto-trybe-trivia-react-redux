@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './styleSheet/Question.css';
 
 class Question extends React.Component {
   state = {
@@ -35,6 +36,8 @@ class Question extends React.Component {
         difficulty,
         question,
       },
+      handleClick,
+      isAnswered,
     } = this.props;
     const { answersList, correctAnswerIndex } = this.state;
     return (
@@ -51,6 +54,8 @@ class Question extends React.Component {
                     data-testid="correct-answer"
                     type="button"
                     key={ answer }
+                    onClick={ handleClick }
+                    className={ isAnswered ? 'correct' : null }
                   >
                     { answer }
                   </button>
@@ -61,6 +66,8 @@ class Question extends React.Component {
                   data-testid={ `wrong-answer-${index}` }
                   type="button"
                   key={ answer }
+                  onClick={ handleClick }
+                  className={ isAnswered ? 'wrong' : null }
                 >
                   { answer }
                 </button>
@@ -81,6 +88,8 @@ Question.propTypes = {
     incorrect_answers: PropTypes.arrayOf(PropTypes.string).isRequired,
     question: PropTypes.string.isRequired,
   }).isRequired,
+  handleClick: PropTypes.func.isRequired,
+  isAnswered: PropTypes.bool.isRequired,
 };
 
 export default Question;

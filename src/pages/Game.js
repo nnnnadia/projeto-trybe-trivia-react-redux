@@ -8,7 +8,7 @@ class Game extends Component {
   state = {
     questions: [],
     renderIndex: 0,
-    // answered: false,
+    isAnswered: false,
   }
 
   async componentDidMount() {
@@ -30,8 +30,12 @@ class Game extends Component {
     }));
   }
 
+  handleAnswer = () => {
+    this.setState({ isAnswered: true });
+  }
+
   render() {
-    const { questions, renderIndex } = this.state;
+    const { questions, renderIndex, isAnswered } = this.state;
     return (
       <main>
         <Header />
@@ -40,7 +44,13 @@ class Game extends Component {
           questions.map((question, index) => (
             <section key={ question.question }>
               {
-                renderIndex === index && <Question question={ question } />
+                renderIndex === index && (
+                  <Question
+                    handleClick={ this.handleAnswer }
+                    question={ question }
+                    isAnswered={ isAnswered }
+                  />
+                )
               }
             </section>
           ))
