@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../Components/Header';
 import Question from '../Components/Question';
+// import Timer from '../Components/Timer';
 import fetchTriviaQuestions from '../service/fetchTriviaQuestions';
 
 class Game extends Component {
@@ -24,18 +25,25 @@ class Game extends Component {
     });
   }
 
+  // Evento de próxima questão
   nextQuestion = () => {
     this.setState((prevState) => ({
       renderIndex: prevState.renderIndex + 1,
+      isAnswered: false,
     }));
   }
 
+  // Evento de resposta do usuário
   handleAnswer = () => {
     this.setState({ isAnswered: true });
   }
 
   render() {
-    const { questions, renderIndex, isAnswered } = this.state;
+    const {
+      questions,
+      renderIndex,
+      isAnswered,
+    } = this.state;
     return (
       <main>
         <Header />

@@ -1,11 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Timer from './Timer';
 import './styleSheet/Question.css';
 
 class Question extends React.Component {
   state = {
     answersList: [],
     correctAnswerIndex: 0,
+    time: 30,
+    isTimeOut: false,
+    intervalId: 0,
   }
 
   componentDidMount() {
@@ -29,6 +33,19 @@ class Question extends React.Component {
     });
   }
 
+  // Função para atualizar o Timer
+  updateTimer = () => {
+    const ONE_SECOND = 1000;
+    const intervalId = setInterval(
+      () => this.setState((prevState) => ({ time: prevState.time - 1 }), () => {
+        const { time } = this.state;
+        if (time === 0) this.setState({ isTimeOut: true });
+      }),
+      ONE_SECOND,
+    );
+    this.setState({ intervalId });
+  }
+
   render() {
     const {
       question: {
@@ -39,9 +56,15 @@ class Question extends React.Component {
       handleClick,
       isAnswered,
     } = this.props;
-    const { answersList, correctAnswerIndex } = this.state;
+    const { answersList, correctAnswerIndex, time, intervalId, isTimeOut } = this.state;
     return (
       <div>
+        <Timer
+          time={ time }
+          intervaId={ intervalId }
+          isAnswered={ isAnswered }
+          updateTimer={ this.updateTimer }
+        />
         <h2 data-testid="question-text">{ question }</h2>
         <h4 data-testid="question-category">{ category }</h4>
         <h4>{ difficulty }</h4>
@@ -56,6 +79,7 @@ class Question extends React.Component {
                     key={ answer }
                     onClick={ handleClick }
                     className={ isAnswered ? 'correct' : null }
+                    disabled={ isTimeOut }
                   >
                     { answer }
                   </button>
@@ -68,6 +92,7 @@ class Question extends React.Component {
                   key={ answer }
                   onClick={ handleClick }
                   className={ isAnswered ? 'wrong' : null }
+                  disabled={ isTimeOut }
                 >
                   { answer }
                 </button>
