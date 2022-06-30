@@ -8,10 +8,10 @@ class Timer extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { isAnswered, time, intervaId } = prevProps;
+    const { isAnswered, time, intervalId } = prevProps;
 
     if (isAnswered || time === 1) {
-      clearInterval(intervaId);
+      clearInterval(intervalId);
     }
   }
 
@@ -28,7 +28,7 @@ class Timer extends React.Component {
 Timer.propTypes = {
   time: PropTypes.number.isRequired,
   isAnswered: PropTypes.bool.isRequired,
-  intervaId: PropTypes.number.isRequired,
+  intervalId: PropTypes.number.isRequired,
   updateTimer: PropTypes.func.isRequired,
 };
 

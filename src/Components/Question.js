@@ -46,23 +46,51 @@ class Question extends React.Component {
     this.setState({ intervalId });
   }
 
+  calculateScore = (isCorrect) => {
+    const {
+      props: {
+        handleClick,
+        question: { difficulty },
+      },
+      state: { time },
+    } = this;
+    const BASE_SCORE = 10;
+    const difficultyScore = {
+      easy: 1,
+      medium: 2,
+      hard: 3,
+    };
+    const TOTAL_SCORE = isCorrect === true
+      ? BASE_SCORE + (time * difficultyScore[difficulty])
+      : 0;
+    handleClick(TOTAL_SCORE);
+  }
+
   render() {
     const {
-      question: {
-        category,
-        difficulty,
-        question,
+      props: {
+        question: {
+          category,
+          difficulty,
+          question,
+        },
+        isAnswered,
+        nextQuestion,
       },
-      handleClick,
-      isAnswered,
-      nextQuestion,
-    } = this.props;
-    const { answersList, correctAnswerIndex, time, intervalId, isTimeOut } = this.state;
+      state: {
+        answersList,
+        correctAnswerIndex,
+        time,
+        intervalId,
+        isTimeOut,
+      },
+      calculateScore,
+    } = this;
     return (
       <div>
         <Timer
           time={ time }
-          intervaId={ intervalId }
+          intervalId={ intervalId }
           isAnswered={ isAnswered }
           updateTimer={ this.updateTimer }
         />
@@ -78,7 +106,7 @@ class Question extends React.Component {
                     data-testid="correct-answer"
                     type="button"
                     key={ answer }
-                    onClick={ handleClick }
+                    onClick={ () => calculateScore(true) }
                     className={ isAnswered ? 'correct' : null }
                     disabled={ isTimeOut }
                   >
@@ -91,7 +119,7 @@ class Question extends React.Component {
                   data-testid={ `wrong-answer-${index}` }
                   type="button"
                   key={ answer }
-                  onClick={ handleClick }
+                  onClick={ () => calculateScore(false) }
                   className={ isAnswered ? 'wrong' : null }
                   disabled={ isTimeOut }
                 >

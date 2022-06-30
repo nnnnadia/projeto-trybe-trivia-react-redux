@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import PropTypes from 'prop-types';
 import Header from '../Components/Header';
 import Question from '../Components/Question';
 import fetchTriviaQuestions from '../service/fetchTriviaQuestions';
+import { actUpdateScore } from '../redux/actions';
 
 class Game extends Component {
   state = {
@@ -34,8 +36,10 @@ class Game extends Component {
   }
 
   // Evento de resposta do usuário
-  handleAnswer = () => {
+  handleAnswer = (questionScore) => {
+    const { updateScore } = this.props;
     this.setState({ isAnswered: true });
+    updateScore(questionScore);
   }
 
   render() {
@@ -72,10 +76,15 @@ class Game extends Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => ({
+  updateScore: (questionScore) => dispatch(actUpdateScore(questionScore)),
+});
+
 Game.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
+  updateScore: PropTypes.func.isRequired,
 };
 
-export default Game;
+export default connect(null, mapDispatchToProps)(Game);
