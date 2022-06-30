@@ -24,18 +24,25 @@ class Game extends Component {
     });
   }
 
+  // Evento de próxima questão
   nextQuestion = () => {
     this.setState((prevState) => ({
       renderIndex: prevState.renderIndex + 1,
+      isAnswered: false,
     }));
   }
 
+  // Evento de resposta do usuário
   handleAnswer = () => {
     this.setState({ isAnswered: true });
   }
 
   render() {
-    const { questions, renderIndex, isAnswered } = this.state;
+    const {
+      questions,
+      renderIndex,
+      isAnswered,
+    } = this.state;
     return (
       <main>
         <Header />
@@ -49,19 +56,13 @@ class Game extends Component {
                     handleClick={ this.handleAnswer }
                     question={ question }
                     isAnswered={ isAnswered }
+                    nextQuestion={ this.nextQuestion }
                   />
                 )
               }
             </section>
           ))
         }
-        <button
-          data-testid="btn-next"
-          type="button"
-          onClick={ this.nextQuestion }
-        >
-          Próximo
-        </button>
       </main>
     );
   }
