@@ -9,7 +9,6 @@ class Timer extends React.Component {
 
   componentDidUpdate(prevProps) {
     const { isAnswered, time, intervalId } = prevProps;
-
     if (isAnswered || time === 1) {
       clearInterval(intervalId);
     }
