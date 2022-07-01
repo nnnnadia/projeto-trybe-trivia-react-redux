@@ -7,9 +7,10 @@ export const actGetPlayer = (name, gravatarEmail) => ({
   },
 });
 
-export const actUpdateScore = (questionScore) => ({
+export const actUpdateScore = (questionScore, assertion) => ({
   type: UPDATE_SCORE,
   payload: {
     questionScore,
+    assertion,
   },
 });

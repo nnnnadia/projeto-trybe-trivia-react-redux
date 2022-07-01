@@ -21,6 +21,7 @@ const playerReducer = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       score: state.score + action.payload.questionScore,
+      assertions: state.assertions + action.payload.assertion,
     };
   default:
     return state;
