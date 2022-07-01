@@ -10,11 +10,6 @@ class Feedback extends React.Component {
     history.push('/');
   }
 
-  goToRanking = () => {
-    const { history } = this.props;
-    history.push('/ranking');
-  }
-
   render() {
     const { assertions, score } = this.props;
     const MIN_ASSERTIONS = 3;
