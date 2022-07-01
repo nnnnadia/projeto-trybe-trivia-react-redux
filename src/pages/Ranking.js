@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import PropTypes from 'prop-types';
-// import { readStorageRanking } from '../service/localStorageRanking';
+import { readStorageRanking } from '../service/localStorageRanking';
 
 class Ranking extends React.Component {
   state = {
@@ -9,9 +9,9 @@ class Ranking extends React.Component {
   }
 
   componentDidMount() {
-    const data = JSON.parse(localStorage.getItem('ranking'));
-    const sortedRanking = data.sort((a, b) => (b.score - a.score));
-    this.setState({ ranking: sortedRanking });
+    const data = readStorageRanking();
+    const sorted = data.sort((a, b) => (b.score - a.score));
+    this.setState({ ranking: sorted });
   }
 
   render() {

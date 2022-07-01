@@ -33,19 +33,28 @@ class Game extends Component {
     const {
       props: { history },
     } = this;
+    const { renderIndex } = this.state;
     const LAST_INDEX = 4;
-    this.setState((prevState) => ({
-      renderIndex: prevState.renderIndex + 1,
-      isAnswered: false,
-    }), () => {
-      const { renderIndex } = this.state;
-      if (renderIndex === LAST_INDEX) {
-        const { ranking } = this.props;
-        const storeRanking = { ...ranking, picture: `https://www.gravatar.com/avatar/${md5(ranking.picture).toString()}` };
-        saveScorePlayer(storeRanking);
-        history.push('/feedback');
-      }
-    });
+    if (renderIndex === LAST_INDEX) {
+      history.push('/feedback');
+      this.addPlayerToStorage();
+    } else {
+      this.setState((prevState) => ({
+        renderIndex: prevState.renderIndex + 1,
+        isAnswered: false,
+      }));
+    }
+  }
+
+  addPlayerToStorage = () => {
+    const { ranking } = this.props;
+    const picture = `https://www.gravatar.com/avatar/${md5(ranking.picture).toString()}`;
+    const storeRanking = { ...ranking, picture };
+    if (!JSON.parse(localStorage.getItem('ranking'))) {
+      localStorage.setItem('ranking', JSON.stringify([storeRanking]));
+    } else {
+      saveScorePlayer(storeRanking);
+    }
   }
 
   // Evento de resposta do usuário
