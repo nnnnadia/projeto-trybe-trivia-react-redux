@@ -1,15 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link } from 'react-router-dom';
 import Header from '../Components/Header';
 
 class Feedback extends React.Component {
-  playAgain = () => {
-    const { history } = this.props;
-    history.push('/');
-  }
-
   render() {
     const { assertions, score } = this.props;
     const MIN_ASSERTIONS = 3;
@@ -33,8 +28,12 @@ class Feedback extends React.Component {
           <span data-testid="feedback-total-question">{ assertions }</span>
         </section>
         <Link to="/ranking">
-          <button type="button" data-testid="btn-ranking">Ranking</button>
+          <button type="button" data-testid="btn-ranking">VER RANKING</button>
         </Link>
+        <Link to="/">
+          <button type="button" data-testid="btn-play-again">JOGAR NOVAMENTE</button>
+        </Link>
+
       </main>
     );
   }
