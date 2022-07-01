@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import Header from '../Components/Header';
 
 class Feedback extends React.Component {
@@ -36,24 +37,9 @@ class Feedback extends React.Component {
           <span>Acertos:</span>
           <span data-testid="feedback-total-question">{ assertions }</span>
         </section>
-        <section>
-          <button
-            type="button"
-            data-testid="btn-ranking"
-            onClick={ this.goToRanking }
-          >
-            VER RANKING
-          </button>
-        </section>
-        <section>
-          <button
-            type="button"
-            data-testid="btn-play-again"
-            onClick={ this.playAgain }
-          >
-            JOGAR NOVAMENTE
-          </button>
-        </section>
+        <Link to="/ranking">
+          <button type="button" data-testid="btn-ranking">Ranking</button>
+        </Link>
       </main>
     );
   }

@@ -137,7 +137,7 @@ class Question extends React.Component {
                 type="button"
                 onClick={ nextQuestion }
               >
-                Próximo
+                Next
               </button>
             )
           }
