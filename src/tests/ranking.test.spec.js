@@ -1,42 +1,71 @@
-import React from "react";
-import renderWithRouterAndRedux from "./helpers/renderWithRouterAndRedux";
-import { screen, cleanup } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import React from 'react';
+import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import renderWithRouterAndRedux from './helpers/renderWithRouterAndRedux';
 import Ranking from '../pages/Ranking';
 import App from '../App';
+import { saveScorePlayer } from '../service/localStorageRanking';
 
 describe('Testa a página de ranking', () => {
-    beforeEach(() => {
-      localStorage.setItem('ranking', JSON.stringify([{ name: "Usuário", score: 100, picture: "https://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e"}]));
-    })
+  const ranking = [
+    {
+      name: 'jogador1',
+      score: 100,
+      picture:
+        'https://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e',
+    },
+    {
+      name: 'jogador2',
+      score: 120,
+      picture:
+        'https://www.gravatar.com/avatar/9e1f151bf326b5774f0b86cec01a9259',
+    },
+    {
+      name: 'jogador3',
+      score: 50,
+      picture:
+        'https://www.gravatar.com/avatar/86717b5175f8f51878eda44d435a756d',
+    },
+  ];
 
-    it('Testa se os componentes são renderizados na tela', async () => {
-        renderWithRouterAndRedux(<Ranking />);
-
-        const title = screen.getByTestId('ranking-title');
-        const image = screen.getByAltText('imagem usuario');
-        const name = screen.getByRole('heading', { name: /usuário/i, level: 3 })
-        const score = screen.getByRole('heading', { name: '100', level: 3 });
-        const button = screen.getByRole('button', { name: /voltar/i });
-
-        expect(title).toBeInTheDocument();
-        expect(image).toHaveProperty('src', 'https://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e');
-        expect(name).toBeInTheDocument();
-        expect(score).toBeInTheDocument();
-        expect(button).toBeInTheDocument();
-
-    })
-
-    it('Testa a rota do botão que volta para o início da aplicação', () => {
-        const { history } = renderWithRouterAndRedux(<App />)
-
-        history.push('/ranking');
-
-        const button = screen.getByRole('button', { name: /voltar/i });
-       
-        userEvent.click(button);
-        
-        const { pathname } = history.location;
-        expect(pathname).toBe('/');
+  beforeEach(() => {
+    ranking.forEach((player) => {
+      if (!JSON.parse(localStorage.getItem('ranking'))) {
+        localStorage.setItem('ranking', JSON.stringify([player]));
+      } else {
+        saveScorePlayer(player);
+      }
     });
-})
+  });
+
+  it("Testa se os componentes são renderizados na tela", async () => {
+    renderWithRouterAndRedux(<Ranking />);    
+    expect(screen.getByTestId("ranking-title")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /voltar/i })).toBeInTheDocument();
+
+    ranking.forEach(({ name, score, picture }) => {
+      expect(screen.getByAltText(`imagem ${name}`)).toHaveProperty('src', picture);
+      expect(screen.getByRole("heading", { name: name, level: 3 })).toBeInTheDocument();
+      expect(screen.getByRole("heading", { name: score, level: 3 })).toBeInTheDocument();
+    });
+  });
+
+  // it("Testa se o ranking é renderizado em ordem decrescente", () => {
+  //   // renderWithRouterAndRedux(<Ranking />);
+  //   const sortedRanking = ranking.sort((a, b) => (b.score - a.score));
+  //   expect(sortedRanking).toEqual(sorted);
+  // }); 
+
+  it("Testa a rota do botão que volta para o início da aplicação", () => {
+    const { history } = renderWithRouterAndRedux(<App />);
+
+    history.push("/ranking");
+
+    const button = screen.getByRole("button", { name: /voltar/i });
+
+    userEvent.click(button);
+
+    const { pathname } = history.location;
+    expect(pathname).toBe("/");
+  });
+});

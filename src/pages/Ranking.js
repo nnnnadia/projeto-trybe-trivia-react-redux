@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
-import PropTypes from 'prop-types';
 import { readStorageRanking } from '../service/localStorageRanking';
 
 class Ranking extends React.Component {
@@ -23,7 +22,7 @@ class Ranking extends React.Component {
           <div key={ index }>
             <img
               src={ score.picture }
-              alt="imagem usuario"
+              alt={ `imagem ${score.name}` }
             />
             <h3 data-testid={ `player-name-${index}` }>{ score.name }</h3>
             <h3 data-testid={ `player-score-${index}` }>{ score.score }</h3>
@@ -41,11 +40,5 @@ class Ranking extends React.Component {
     );
   }
 }
-
-Ranking.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func,
-  }).isRequired,
-};
 
 export default Ranking;
