@@ -1,15 +1,10 @@
 import React from 'react';
-import renderWithRouterAndRedux from './helpers/renderWithRouterAndRedux';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import renderWithRouterAndRedux from './helpers/renderWithRouterAndRedux';
 import Ranking from '../pages/Ranking';
 import App from '../App';
-import {
-  saveScorePlayer,
-} from '../service/localStorageRanking';
-import fetchMockJest from 'fetch-mock-jest';
-import { prototype } from 'mocha';
-import { array } from 'prop-types';
+import { saveScorePlayer } from '../service/localStorageRanking';
 
 describe('Testa a página de ranking', () => {
   const ranking = [
