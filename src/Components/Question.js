@@ -87,17 +87,21 @@ class Question extends React.Component {
       calculateScore,
     } = this;
     return (
-      <div>
-        <Timer
-          time={ time }
-          intervalId={ intervalId }
-          isAnswered={ isAnswered }
-          updateTimer={ this.updateTimer }
-        />
+      <section className="question-container">
+        <div className="question-header-container">
+          <div className="question-info-container">
+            <h4 data-testid="question-category">{ category }</h4>
+            <h4>{ `( ${difficulty} )` }</h4>
+          </div>
+          <Timer
+            time={ time }
+            intervalId={ intervalId }
+            isAnswered={ isAnswered }
+            updateTimer={ this.updateTimer }
+          />
+        </div>
         <h2 data-testid="question-text">{ question }</h2>
-        <h4 data-testid="question-category">{ category }</h4>
-        <h4>{ difficulty }</h4>
-        <div data-testid="answer-options">
+        <div className="answers-container" data-testid="answer-options">
           {
             answersList.map((answer, index) => {
               if (index === correctAnswerIndex) {
@@ -142,7 +146,7 @@ class Question extends React.Component {
             )
           }
         </div>
-      </div>
+      </section>
     );
   }
 }
