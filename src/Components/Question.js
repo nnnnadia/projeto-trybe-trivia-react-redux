@@ -111,7 +111,7 @@ class Question extends React.Component {
                     type="button"
                     key={ answer }
                     onClick={ () => calculateScore(true) }
-                    className={ isAnswered ? 'correct' : null }
+                    className={ isAnswered ? 'correct' : 'no-border' }
                     disabled={ isTimeOut }
                   >
                     { answer }
@@ -124,7 +124,7 @@ class Question extends React.Component {
                   type="button"
                   key={ answer }
                   onClick={ () => calculateScore(false) }
-                  className={ isAnswered ? 'wrong' : null }
+                  className={ isAnswered ? 'wrong' : 'no-border' }
                   disabled={ isTimeOut }
                 >
                   { answer }
@@ -140,6 +140,7 @@ class Question extends React.Component {
                 data-testid="btn-next"
                 type="button"
                 onClick={ nextQuestion }
+                className="next-button"
               >
                 Next
               </button>

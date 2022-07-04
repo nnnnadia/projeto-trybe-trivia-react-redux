@@ -1,3 +1,7 @@
+.no-border {
+  border: none;
+}
+
 .correct {
   border: 3px solid rgb(6, 240, 15);
 }
@@ -41,7 +45,6 @@
 
 .answers-container button {
   background-color: #430387;
-  border: none;
   border-radius: 10px;
   color: white;
   font-size: 16px;
@@ -58,4 +61,19 @@
   background-color: #300261;
   color: gray;
   cursor: not-allowed;
+}
+
+.next-button {
+  background-color: #fc008f;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 0.2em #a80160;
+  color: #430387;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 600;
+  padding: 16px;
+  text-align: center;
+  text-shadow: -1px -1px #a80160 , 1px 1px #430387;
+  width: 100px;
 }
