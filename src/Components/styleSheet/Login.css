@@ -1,3 +1,4 @@
+/* stylelint-disable selector-list-comma-space-after */
 .form-login {
   align-items: center;
   background-attachment: fixed;
@@ -35,9 +36,10 @@
   text-align: center;
   text-shadow: -1px -1px #a80160 , 1px 1px #430387;
   width: 100px;
-  -webkit-border-radius: 7px;
+
+  /* -webkit-border-radius: 7px;
   -moz-border-radius: 7px;
-  -o-border-radius: 7px;
+  -o-border-radius: 7px; */
 }
 
 .button-play:hover {
@@ -57,9 +59,10 @@
   text-align: center;
   text-shadow: -1px -1px #7e06ff , 1px 1px #fc008f;
   width: 180px;
-  -webkit-border-radius: 7px;
+
+  /* -webkit-border-radius: 7px;
   -moz-border-radius: 7px;
-  -o-border-radius: 7px;
+  -o-border-radius: 7px; */
 }
 
 .button-settings:hover {
