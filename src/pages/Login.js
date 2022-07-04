@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { actGetPlayer } from '../redux/actions';
 import { initGame } from '../service/localStoragePlayer';
+import logo from '../trivia.png';
+import '../Components/styleSheet/Login.css';
 
 class Login extends Component {
   state = {
@@ -52,9 +54,11 @@ class Login extends Component {
       },
     } = this;
     return (
-      <form>
+      <form className="form-login">
+        <header className="login-header">
+          <img src={ logo } className="login-logo" alt="logo" />
+        </header>
         <label htmlFor="nome-input">
-          Nome:
           <input
             type="text"
             id="nome-input"
@@ -62,10 +66,10 @@ class Login extends Component {
             name="nome"
             value={ nome }
             onChange={ handleChange }
+            placeholder="Name"
           />
         </label>
         <label htmlFor="email-input">
-          Email:
           <input
             type="text"
             id="email-input"
@@ -73,6 +77,7 @@ class Login extends Component {
             name="email"
             value={ email }
             onChange={ handleChange }
+            placeholder="Email"
           />
         </label>
         <button
@@ -80,11 +85,12 @@ class Login extends Component {
           data-testid="btn-play"
           onClick={ handleClick }
           disabled={ isButtonDisabled }
+          className="button-play"
         >
           Play
         </button>
         <Link to="/settings">
-          <button type="button" data-testid="btn-settings">
+          <button type="button" data-testid="btn-settings" className="button-settings">
             Configurações
           </button>
         </Link>
