@@ -13,8 +13,8 @@ class Feedback extends React.Component {
     const MIN_ASSERTIONS = 3;
     return (
       <main className="feedback">
-        <h1>Feedback Page</h1>
         <Header />
+        <h1>Feedback</h1>
         {
           (assertions < MIN_ASSERTIONS)
             ? (
