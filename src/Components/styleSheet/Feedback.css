@@ -1,0 +1,88 @@
+.feedback {
+  background: linear-gradient(52deg, #1e427e 0%, #290044 40%, #8a004e 100%);
+  background-position: top;
+  background-size: cover;
+  color: white;
+  height: 100%;
+  margin: 0;
+  position: fixed;
+  width: 100%;
+}
+
+.button-ranking {
+  background-color: #fc008f;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 0.2em #a80160;
+  color: #430387;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 700;
+  padding: 16px;
+  text-align: center;
+  text-shadow: -1px -1px #a80160 , 1px 1px #430387;
+  width: 160px;
+}
+
+.button-play-again {
+  background-color: #430387;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 0.2em #7e06ff;
+  color: #fc008f;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 700;
+  padding: 16px;
+  text-align: center;
+  text-shadow: -1px -1px #7e06ff , 1px 1px #fc008f;
+  width: 180px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.points {
+  display: flex;
+  font-size: 30px;
+  gap: 10px;
+  justify-content: center;
+}
+
+.better {
+  align-items: center;
+  border: 1px solid white;
+  display: flex;
+  flex-direction: row;
+  font-family: Courier New , Courier , monospace;
+  font-size: 30px;
+  justify-content: center;
+  margin: 10px 500px;
+  padding: 15px;
+}
+
+.well-done {
+  align-items: center;
+  border: 1px solid white;
+  display: flex;
+  flex-direction: row;
+  font-family: Courier New , Courier , monospace;
+  font-size: 30px;
+  justify-content: center;
+  margin: 10px 500px;
+  padding: 15px;
+}
+
+.sad-icon {
+  font-size: 60px;
+}
+
+.happy-icon {
+  font-size: 60px;
+}
+
