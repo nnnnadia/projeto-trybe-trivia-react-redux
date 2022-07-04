@@ -87,17 +87,21 @@ class Question extends React.Component {
       calculateScore,
     } = this;
     return (
-      <div>
-        <Timer
-          time={ time }
-          intervalId={ intervalId }
-          isAnswered={ isAnswered }
-          updateTimer={ this.updateTimer }
-        />
+      <section className="question-container">
+        <div className="question-header-container">
+          <div className="question-info-container">
+            <h4 data-testid="question-category">{ category }</h4>
+            <h4>{ `( ${difficulty} )` }</h4>
+          </div>
+          <Timer
+            time={ time }
+            intervalId={ intervalId }
+            isAnswered={ isAnswered }
+            updateTimer={ this.updateTimer }
+          />
+        </div>
         <h2 data-testid="question-text">{ question }</h2>
-        <h4 data-testid="question-category">{ category }</h4>
-        <h4>{ difficulty }</h4>
-        <div data-testid="answer-options">
+        <div className="answers-container" data-testid="answer-options">
           {
             answersList.map((answer, index) => {
               if (index === correctAnswerIndex) {
@@ -107,7 +111,7 @@ class Question extends React.Component {
                     type="button"
                     key={ answer }
                     onClick={ () => calculateScore(true) }
-                    className={ isAnswered ? 'correct' : null }
+                    className={ isAnswered ? 'correct' : 'no-border' }
                     disabled={ isTimeOut }
                   >
                     { answer }
@@ -120,7 +124,7 @@ class Question extends React.Component {
                   type="button"
                   key={ answer }
                   onClick={ () => calculateScore(false) }
-                  className={ isAnswered ? 'wrong' : null }
+                  className={ isAnswered ? 'wrong' : 'no-border' }
                   disabled={ isTimeOut }
                 >
                   { answer }
@@ -136,13 +140,14 @@ class Question extends React.Component {
                 data-testid="btn-next"
                 type="button"
                 onClick={ nextQuestion }
+                className="next-button"
               >
                 Next
               </button>
             )
           }
         </div>
-      </div>
+      </section>
     );
   }
 }

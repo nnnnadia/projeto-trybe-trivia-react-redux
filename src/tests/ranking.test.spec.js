@@ -50,12 +50,6 @@ describe('Testa a página de ranking', () => {
     });
   });
 
-  // it("Testa se o ranking é renderizado em ordem decrescente", () => {
-  //   // renderWithRouterAndRedux(<Ranking />);
-  //   const sortedRanking = ranking.sort((a, b) => (b.score - a.score));
-  //   expect(sortedRanking).toEqual(sorted);
-  // }); 
-
   it("Testa a rota do botão que volta para o início da aplicação", () => {
     const { history } = renderWithRouterAndRedux(<App />);
 

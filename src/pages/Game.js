@@ -7,6 +7,7 @@ import Question from '../Components/Question';
 import fetchTriviaQuestions from '../service/fetchTriviaQuestions';
 import { actUpdateScore } from '../redux/actions';
 import { saveScorePlayer } from '../service/localStorageRanking';
+import './styleSheet/Game.css';
 
 class Game extends Component {
   state = {
@@ -80,9 +81,8 @@ class Game extends Component {
       nextQuestion,
     } = this;
     return (
-      <main>
+      <main className="game-main-container">
         <Header />
-        <h1>Game page</h1>
         {
           questions.map((question, index) => (
             <section key={ question.question }>
