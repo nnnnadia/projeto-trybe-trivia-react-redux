@@ -36,11 +36,6 @@
   text-shadow: -1px -1px #a80160 , 1px 1px #430387;
   width: 100px;
 
-  /* -webkit-border-radius: 7px;
-  -moz-border-radius: 7px;
-  -o-border-radius: 7px; */
-}
-
 .button-play:hover {
   animation: shake infinite 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 }
@@ -58,11 +53,6 @@
   text-align: center;
   text-shadow: -1px -1px #7e06ff , 1px 1px #fc008f;
   width: 180px;
-
-  /* -webkit-border-radius: 7px;
-  -moz-border-radius: 7px;
-  -o-border-radius: 7px; */
-}
 
 .button-settings:hover {
   animation: shake infinite 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
