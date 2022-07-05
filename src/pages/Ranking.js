@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
-import Header from '../Components/Header';
 import { readStorageRanking } from '../service/localStorageRanking';
 import './styleSheet/Ranking.css';
 
@@ -19,7 +18,6 @@ class Ranking extends React.Component {
     const { ranking } = this.state;
     return (
       <div className="ranking">
-        <Header />
         <h1 data-testid="ranking-title">Ranking</h1>
         <div className="ranking-box">
           { ranking.map((score, index) => (
